@@ -1,0 +1,24 @@
+<div class="row">
+  <div class="col-12 col-md-4 offset-md-4">
+    <div class="card shadow-sm" *ngIf="!complete">
+      <div class="card-body">
+        <form [formGroup]="signupForm"  novalidate autocomplete="off">
+          <!-- password -->
+          <div class="form-group">
+            <label id="password" class="control-label font-weight-bold">Password</label>
+            <input type="password" class="form-control" formControlName="password" placeholder="Choose a password" autocomplete="new-password"
+              [ngClass]="{ 'is-valid': (submitted || f.password.dirty) && !f.password.errors, 'is-invalid': (submitted || f.password.dirty) && f.password.errors }">
+            <app-password-strength [passwordToCheck]="signupForm.value.password" (passwordStrength)="onPasswordStrengthChanged($event)"></app-password-strength>
+
+            <div class="invalid-feedback" *ngIf="f.password.errors">
+              <span *ngIf="f.password.errors?.required">Password is required</span>
+              <span *ngIf="f.password.errors?.minlength">Password must be at least 8 characters long</span>
+              <span *ngIf="f.password.errors?.maxlength">Password must be less then 15 characters long</span>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+
+  </div>
+</div>
